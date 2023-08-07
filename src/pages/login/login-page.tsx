@@ -1,17 +1,16 @@
 import React, { useState } from 'react'
 import { LoginUser } from '../../client/api/auth'
+import { useNavigate } from 'react-router-dom'
 
 export default function LoginPage() {
   const [username, setUsername] = useState("")
   const [password, setPassword] = useState("")
+  const navigate = useNavigate()
 
   const handleSubmit = (e: React.SyntheticEvent<HTMLFormElement>) => {
     e.preventDefault()
 
-    LoginUser({ username: username, password: password }).then(data => console.log(data, "DATA"))
-    console.log(e)
-    console.log(username)
-    console.log(password)
+    LoginUser({ username: username, password: password }).then(data => localStorage.setItem('token', data.data.access)).then(() => navigate('/'))
   }
 
   return (
