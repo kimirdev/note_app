@@ -1,8 +1,8 @@
-import { BrowserRouter, Navigate, Route, Routes } from 'react-router-dom'
+import { BrowserRouter, Navigate, Outlet, Route, Routes } from 'react-router-dom'
 import {LoginPage} from './pages/login'
 import PrivateRoute from './routes/PrivateRoute'
 import PublicRoute from './routes/PublicRoute'
-import { NotesPage } from './pages/notes'
+import { CreateNotePage, NoteDetailsPage, NotesPage } from './pages/notes'
 import { Layout } from './components/layout'
 
 function App() {
@@ -12,7 +12,11 @@ function App() {
         <Route path='/' element={<PrivateRoute />}>
           <Route element={<Layout />}>
             <Route index element={<Navigate to='/notes' />} />
-            <Route path='notes' element={<NotesPage />} />
+            <Route path='notes' element={<Outlet />}>
+              <Route index element={<NotesPage />} />
+              <Route path=':id' element={<NoteDetailsPage />} />
+              <Route path='add' element={<CreateNotePage />} />
+            </Route>
           </Route>
         </Route>
         <Route path='/login' element={<PublicRoute />} >

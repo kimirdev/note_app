@@ -12,7 +12,7 @@ function NotesPage() {
   return (
     <section className='flex justify-center'>
       <ul>
-        {notes.map((n: Note) => <li key={n.pk} className=' mb-2'><Note title={n.title} content={n.content} created={n.created} updated={n.updated} /></li>)}
+        {notes.map((n: Note) => <li key={n.pk} className='mb-4'><Note title={n.title} content={n.content} created={n.created} updated={n.updated} pk={n.pk} /></li>)}
       </ul>
     </section>
   )
