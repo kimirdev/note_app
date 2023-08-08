@@ -15,8 +15,8 @@ export default function Note(props: NoteProps) {
     <Link to={`/notes/${pk}/`}>
       <div className="flex w-96 max-[400px]:w-80 min-w-325 rounded justify-between border-2 border-zinc-600 p-2 shadow-lg hover:cursor-pointer transition-all hover:shadow-2xl hover:-translate-y-1">
         <div>
-          <h3 className=" text-zinc-600 max-w-[250px] truncate">{title}</h3>
-          <p className="text-zinc-400 max-w-[250px] truncate">{content}</p>
+          <h3 className=" text-zinc-600 max-w-[200px] truncate">{title}</h3>
+          <p className="text-zinc-400 max-w-[200px] truncate">{content}</p>
         </div>
         <div className=" w-24">
           <span className="block text-xs text-zinc-600">created at</span>

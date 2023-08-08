@@ -22,10 +22,6 @@ export default function CreateNotePage() {
     CreateNewNote({title, content})
       .then(() => navigate("/"))
       .catch(e => setError(e.response.data))
-    // LoginUser({ username: username, password: password })
-    //   .then(data => localStorage.setItem('token', data.data.access))
-    //   .then(() => navigate('/'))
-    //   .catch((e) => setError(e.response.data))
   }
   
   return (
@@ -35,7 +31,7 @@ export default function CreateNotePage() {
       <FormGroup title='Content' value={content} type='textarea' setValue={setContent} />
 
       <div className='flex justify-around w-80'>
-        <button className=" p-2 rounded text-zinc-600 border-2 border-zinc-500 hover:bg-zinc-500 hover:text-white transition-all w-20" onClick={() => navigate("/")}>Cancel</button>
+        <button type="button" className=" p-2 rounded text-zinc-600 border-2 border-zinc-500 hover:bg-zinc-500 hover:text-white transition-all w-20" onClick={() => navigate("/")}>Cancel</button>
         <button type="submit" className="bg-zinc-400 p-2 rounded text-white border-2 border-zinc-500 hover:bg-zinc-500 transition-all w-20">Add</button>
       </div>
 
