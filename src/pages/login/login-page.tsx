@@ -2,8 +2,7 @@ import React, { useState } from 'react'
 import { LoginUser } from '../../client/api/auth'
 import { Link, useNavigate } from 'react-router-dom'
 import ErrorMessage from '../../components/error'
-import { FormGroup, FormTitle, Submit } from '../../components/form'
-import Switcher from '../../components/dark-mode-switcher'
+import { FormInput, FormTitle, Submit } from '../../components/form'
 // import Input from '../../components/input'
 
 type ErrorType = {
@@ -30,8 +29,8 @@ export default function LoginPage() {
   return (
     <form className='flex justify-center min-h-screen items-center flex-col gap-4' onSubmit={handleSubmit}>
       <FormTitle title="Login" />
-      <FormGroup title='Username' value={username} type='text' setValue={setUsername} />
-      <FormGroup title='Password' value={password} type='password' setValue={setPassword} />
+      <FormInput title='Username' value={username} type='text' setValue={setUsername} />
+      <FormInput title='Password' value={password} type='password' setValue={setPassword} />
 
       <Submit title='Login'/>
       <div className='flex flex-col gap-4'>

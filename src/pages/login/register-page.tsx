@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import ErrorMessage from '../../components/error'
-import { FormGroup, FormTitle, Submit } from '../../components/form'
+import { FormInput, FormTitle, Submit } from '../../components/form'
 import { FileUploader } from 'react-drag-drop-files'
 import { RegisterUser } from '../../client/api/auth'
 // import Input from '../../components/input'
@@ -19,8 +19,8 @@ export default function RegisterPage() {
   const [password, setPassword] = useState("")
   // const [repeat, setRepeat] = useState("")
   const [email, setEmail] = useState("")
-  const [firstName, setFirstName] = useState("")
-  const [lastName, setLastName] = useState("")
+  // const [firstName, setFirstName] = useState("")
+  // const [lastName, setLastName] = useState("")
   const [file, setFile] = useState(null);
 
   const handleChange = (file) => {
@@ -32,25 +32,34 @@ export default function RegisterPage() {
   const handleSubmit = (e: React.SyntheticEvent<HTMLFormElement>) => {
     e.preventDefault()
 
-    console.log({username, password, email, firstName, lastName})
+    console.log({username, password, email})
 
     console.log(file)
 
-    if (file) {
-      // RegisterUser({username, password, email, first_name: firstName, last_name: lastName, avatar: file}).then(() => navigate("/login"))
+    const formData = new FormData()
 
-      const fileReader = new FileReader()
+    formData.append("username", username);
+    formData.append("password", password);
+    formData.append("email", email);
+    if (file) formData.append("avatar", file);
+    RegisterUser(formData);
+    // if (file) {
+    //   // RegisterUser({username, password, email, first_name: firstName, last_name: lastName, avatar: file}).then(() => navigate("/login"))
 
-      fileReader.onload = () => {
-        RegisterUser({username, password, email, first_name: firstName, last_name: lastName, avatar_url: fileReader.result}).then(() => navigate("/login"))
-        console.log(fileReader.result)
-      }
+    //   const fileReader = new FileReader()
+
+    //   fileReader.onload = () => {
+    //     const user = {username, password, email, avatar: fileReader.result}
+    //     RegisterUser(user).then(() => navigate("/login"))
+    //     console.log(fileReader.result)
+    //     console.log(user, "USER")
+    //   }
   
-      fileReader.readAsDataURL(file)
-    } else {
-      RegisterUser({username, password, email, first_name: firstName, last_name: lastName}).then(() => navigate("/login"))
+    //   fileReader.readAsDataURL(file)
+    // } else {
+    //   RegisterUser({username, password, email}).then(() => navigate("/login"))
 
-    }
+    // }
     
     // RegisterUser({username, password, email, first_name: firstName, last_name: lastName}).then(() => navigate("/login"))
 
@@ -60,15 +69,14 @@ export default function RegisterPage() {
     <form className='flex justify-center min-h-screen items-center flex-col gap-4' onSubmit={handleSubmit}>
       {/* <h1 className="text-3xl">Register</h1> */}
       <FormTitle title='Register' />
-      <FormGroup title='Username' value={username} type='text' setValue={setUsername} />
-      <FormGroup title='Password' value={password} type='password' setValue={setPassword} />
+      <FormInput title='Username' value={username} type='text' setValue={setUsername} />
+      <FormInput title='Password' value={password} type='password' setValue={setPassword} />
       {/* <FormGroup title='Repeat password' value={repeat} type='password' setValue={setRepeat} /> */}
-      <FormGroup title='Email' value={email} type='email' setValue={setEmail} />
-      <FormGroup title='First name' value={firstName} type='text' setValue={setFirstName} />
-      <FormGroup title='Last name' value={lastName} type='text' setValue={setLastName} />
+      <FormInput title='Email' value={email} type='email' setValue={setEmail} />
+      {/* <FormGroup title='First name' value={firstName} type='text' setValue={setFirstName} />
+      <FormGroup title='Last name' value={lastName} type='text' setValue={setLastName} /> */}
       
       <FileUploader handleChange={handleChange} name="file" types={fileTypes} hoverTitle="">
-
         <div className='flex items-center border-2 border-dashed rounded p-2 border-zinc-600 
         cursor-pointer hover:text-zinc-400 hover:border-zinc-400 transition-all overflow-auto
         dark:border-zinc-200 dark:text-zinc-200 dark:hover:text-zinc-400 dark:hover:border-zinc-400'>

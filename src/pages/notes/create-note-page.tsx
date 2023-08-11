@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { FormGroup, FormTitle, Submit } from '../../components/form'
+import { FormInput, FormTitle, Submit } from '../../components/form'
 import { useNavigate } from 'react-router-dom'
 import { CreateNewNote } from '../../client/api/notes'
 import ErrorMessage from '../../components/error'
@@ -28,8 +28,8 @@ export default function CreateNotePage() {
     <form className='flex justify-center items-center flex-col gap-4' onSubmit={handleSubmit}>
       <FormTitle title='Add new note' />
       {/* <h1 className="text-3xl">Add new note</h1> */}
-      <FormGroup title='Title' value={title} type='text' setValue={setTitle} />
-      <FormGroup title='Content' value={content} type='textarea' setValue={setContent} />
+      <FormInput title='Title' value={title} type='text' setValue={setTitle} />
+      <FormInput title='Content' value={content} type='textarea' setValue={setContent} />
 
       <div className='flex justify-around w-80'>
         <button type="button" className=" p-2 rounded text-zinc-600 border-2 border-zinc-500 hover:bg-zinc-500 dark:text-zinc-200 dark:border-zinc-200 dark:hover:bg-zinc-200 dark:hover:text-zinc-600 hover:text-white transition-all w-20" onClick={() => navigate("/")}>Cancel</button>

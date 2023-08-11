@@ -1,6 +1,6 @@
 import Input from "./input";
-import FormGroup from "./form-group";
+import FormInput from "./form-input";
 import FormTitle from "./form-title";
 import Submit from "./submit";
 
-export { Input, FormGroup, FormTitle, Submit }
+export { Input, FormInput, FormTitle, Submit }

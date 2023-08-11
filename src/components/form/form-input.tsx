@@ -8,7 +8,7 @@ type FormGroupProps = {
   setValue: React.Dispatch<React.SetStateAction<string>>,
 }
 
-export default function FormGroup(props: FormGroupProps) {
+export default function FormInput(props: FormGroupProps) {
   const {title, type, value, setValue} = props;
 
   return (

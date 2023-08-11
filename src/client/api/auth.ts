@@ -1,3 +1,4 @@
+import axios from "axios";
 import { instance } from "..";
 
 export const LoginUser = (data: { username: string, password: string }) => {
@@ -5,7 +6,7 @@ export const LoginUser = (data: { username: string, password: string }) => {
 }
 
 export const RegisterUser = (data: any) => {
-  return instance.post('/user/register/', data)
+  return instance.post('/user/register/', data, { headers: { 'Content-Type': "multipart/form-data" }})
 }
 
 export const UserInfo = () => {
