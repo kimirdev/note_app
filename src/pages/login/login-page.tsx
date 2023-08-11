@@ -1,8 +1,9 @@
 import React, { useState } from 'react'
 import { LoginUser } from '../../client/api/auth'
-import { useNavigate } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import ErrorMessage from '../../components/error'
-import { FormGroup } from '../../components/input'
+import { FormGroup, FormTitle, Submit } from '../../components/form'
+import Switcher from '../../components/dark-mode-switcher'
 // import Input from '../../components/input'
 
 type ErrorType = {
@@ -28,15 +29,17 @@ export default function LoginPage() {
 
   return (
     <form className='flex justify-center min-h-screen items-center flex-col gap-4' onSubmit={handleSubmit}>
-      <h1 className="text-3xl">Login</h1>
+      <FormTitle title="Login" />
       <FormGroup title='Username' value={username} type='text' setValue={setUsername} />
       <FormGroup title='Password' value={password} type='password' setValue={setPassword} />
 
-      <button type="submit" className="bg-zinc-400 p-2 rounded text-white border-2 border-zinc-500 hover:bg-zinc-500 transition-all">Login</button>
-
-      {error?.username && <ErrorMessage message={`username: ${error.username}`} />}
-      {error?.password && <ErrorMessage message={`password: ${error.password}`} />}
-      {error?.detail && <ErrorMessage message={`${error.detail}`} />}
+      <Submit title='Login'/>
+      <div className='flex flex-col gap-4'>
+        {error?.username && <ErrorMessage message={`username: ${error.username}`} />}
+        {error?.password && <ErrorMessage message={`password: ${error.password}`} />}
+        {error?.detail && <ErrorMessage message={`${error.detail}`} />}
+      </div>
+      <p className='mt-4 text-sm dark:text-zinc-200'>Don't have an account? <Link to='/register' className=' underline'>Register</Link>.</p>
     </form>
   )
 }

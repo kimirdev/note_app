@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { FormGroup } from "../../components/input";
+import { FormGroup, FormTitle, Submit } from "../../components/form";
 import { GetNoteById, UpdateNoteById } from "../../client/api/notes";
 import { useNavigate, useParams } from "react-router-dom";
 
@@ -36,13 +36,13 @@ export default function EditNotePage() {
   
   return (
     <form className='flex justify-center items-center flex-col gap-4' onSubmit={handleSubmit}>
-      <h1 className="text-3xl">Edit note</h1>
+      <FormTitle title="Edite note" />
       <FormGroup title='Title' value={title} type='text' setValue={setTitle} />
       <FormGroup title='Content' value={content} type='textarea' setValue={setContent} />
 
       <div className='flex justify-around w-80'>
-        <button type="button" className=" p-2 rounded text-zinc-600 border-2 border-zinc-500 hover:bg-zinc-500 hover:text-white transition-all w-20" onClick={() => navigate(`/notes/${id}/`)}>Cancel</button>
-        <button type="submit" className="bg-zinc-400 p-2 rounded text-white border-2 border-zinc-500 hover:bg-zinc-500 transition-all w-20">Edit</button>
+        <button type="button" className=" p-2 rounded text-zinc-600 border-2 border-zinc-500 hover:bg-zinc-500 dark:text-zinc-200 dark:border-zinc-200 dark:hover:bg-zinc-200 dark:hover:text-zinc-600 hover:text-white transition-all w-20"  onClick={() => navigate(`/notes/${id}/`)}>Cancel</button>
+        <Submit title="Edit"/>
       </div>
 
       {/* {error?.title && <ErrorMessage message={`username: ${error.title}`} />}
