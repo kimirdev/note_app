@@ -42,7 +42,7 @@ export default function RegisterPage() {
     formData.append("password", password);
     formData.append("email", email);
     if (file) formData.append("avatar", file);
-    RegisterUser(formData);
+    RegisterUser(formData).then(() => navigate("/login"));
     // if (file) {
     //   // RegisterUser({username, password, email, first_name: firstName, last_name: lastName, avatar: file}).then(() => navigate("/login"))
 
