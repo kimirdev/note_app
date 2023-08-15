@@ -4,10 +4,15 @@ import Switcher from '../dark-mode-switcher';
 import { useEffect, useState } from 'react';
 import { UserInfo } from '../../client/api/auth';
 
+type UserType = {
+  username: string,
+  avatar_url: string,
+}
+
 export default function Layout() {
   const navigate = useNavigate()
 
-  const [user, setUser] = useState(null);
+  const [user, setUser] = useState<UserType|null>(null);
 
   const onClickLogout = () => {
     localStorage.removeItem('token');
@@ -21,13 +26,6 @@ export default function Layout() {
       UserInfo().then(data => setUser(data.data.results[0]))
     }
   }, [authed])
-
-
-  useEffect(() => {
-    if (user) {
-      console.log(user)
-    }
-  }, [user])
 
   return (
     <>

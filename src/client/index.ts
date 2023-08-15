@@ -1,14 +1,12 @@
 import axios from "axios";
 
 export const instance = axios.create({
-  // baseURL: "http://192.168.30.71:8000/",
-  baseURL: "http://127.0.0.1:8000/",
+  baseURL: import.meta.env.VITE_BASE_URL,
   headers: {
     'Accept': '*/*',
     'Content-Type': 'application/json'
   }
 });
-
 
 instance.interceptors.request.use((config) => {
   const token = localStorage.getItem("token")
@@ -24,7 +22,6 @@ axios.interceptors.response.use(response => {
   return response;
 }, error => {
  if (error.response.status === 401) {
-  console.log("ERROR")
   localStorage.removeItem('token')
   window.location.reload()
  }

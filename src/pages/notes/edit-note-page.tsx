@@ -27,7 +27,6 @@ export default function EditNotePage() {
   }, [id])
 
   useEffect(() => {
-    console.log(note, "NOTE")
     if (note) {
       setTitle(note.title)
       setContent(note.content)

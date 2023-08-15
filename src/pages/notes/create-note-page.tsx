@@ -27,7 +27,6 @@ export default function CreateNotePage() {
   return (
     <form className='flex justify-center items-center flex-col gap-4' onSubmit={handleSubmit}>
       <FormTitle title='Add new note' />
-      {/* <h1 className="text-3xl">Add new note</h1> */}
       <FormInput title='Title' value={title} type='text' setValue={setTitle} />
       <FormInput title='Content' value={content} type='textarea' setValue={setContent} />
 
