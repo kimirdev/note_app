@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
 import { DarkModeSwitch } from 'react-toggle-dark-mode';
 
 export default function Switcher() {

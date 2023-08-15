@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
 import { GetAllNotes } from '../../client/api/notes'
 import Note from '../../components/note'
 

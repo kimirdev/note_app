@@ -18,10 +18,11 @@ export default function RegisterPage() {
   const [username, setUsername] = useState("")
   const [password, setPassword] = useState("")
   const [email, setEmail] = useState("")
-  const [file, setFile] = useState(null);
+  const [file, setFile] = useState<File | null>(null);
   const [error, setError] = useState<ErrorType | null>(null)
 
-  const handleChange = (file) => {
+  const handleChange = (file: File | null) => {
+    console.log(file)
     setFile(file);
   };
 

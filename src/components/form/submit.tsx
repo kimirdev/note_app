@@ -1,5 +1,3 @@
-import React from 'react'
-
 export default function Submit({title}: {title: string}) {
   return (
     <button type="submit" 
