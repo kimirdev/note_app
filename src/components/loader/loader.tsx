@@ -4,7 +4,7 @@ type SpinnerSize = "small" | "medium" | "large"
 
 export default function Loader({size, dark} : {size: SpinnerSize, dark: boolean}) {
 
-  const color = useMemo<string>(() => dark ? "#27272a" : "#f4f4f5", [dark])
+  const color = useMemo<string>(() => dark ? "#52525b" : "#f4f4f5", [dark])
 
   const wdth = useMemo<string>(() => {
     switch (size) {
