@@ -15,15 +15,18 @@ export default function LoginPage() {
   const [username, setUsername] = useState("")
   const [password, setPassword] = useState("")
   const [error, setError] = useState<ErrorType | null>(null)
+  const [loading, setLoading] = useState(false)
+
   const navigate = useNavigate()
 
   const handleSubmit = (e: React.SyntheticEvent<HTMLFormElement>) => {
     e.preventDefault()
-
+    setLoading(true)
     LoginUser({ username: username, password: password })
       .then(data => localStorage.setItem('token', data.data.access))
       .then(() => navigate('/'))
       .catch((e) => setError(e.response.data))
+      .finally(() => setLoading(false))
   }
 
   return (
@@ -32,7 +35,8 @@ export default function LoginPage() {
       <FormInput title='Username' value={username} type='text' setValue={setUsername} />
       <FormInput title='Password' value={password} type='password' setValue={setPassword} />
 
-      <Submit title='Login'/>
+
+      <Submit title='Login' loading={loading}/>
       <div className='flex flex-col gap-4'>
         {error?.username && <ErrorMessage message={`username: ${error.username}`} />}
         {error?.password && <ErrorMessage message={`password: ${error.password}`} />}

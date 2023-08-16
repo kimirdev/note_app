@@ -10,18 +10,22 @@ type ErrorType = {
 }
 
 export default function CreateNotePage() {
-  const [title, setTitle] = useState("")
-  const [content, setContent] = useState("")
-  const [error, setError] = useState<ErrorType|null>(null)
-  const navigate = useNavigate()
+  const [title, setTitle] = useState("");
+  const [content, setContent] = useState("");
+  const [error, setError] = useState<ErrorType|null>(null);
+  const [loading, setLoading] = useState(false);
+
+  const navigate = useNavigate();
 
   const handleSubmit = (e: React.SyntheticEvent<HTMLFormElement>) => {
     e.preventDefault()
 
+    setLoading(true)
 
     CreateNewNote({title, content})
       .then(() => navigate("/"))
       .catch(e => setError(e.response.data))
+      .finally(() => setLoading(false))
   }
   
   return (
@@ -32,7 +36,7 @@ export default function CreateNotePage() {
 
       <div className='flex justify-around w-80'>
         <button type="button" className=" p-2 rounded text-zinc-600 border-2 border-zinc-500 hover:bg-zinc-500 dark:text-zinc-200 dark:border-zinc-200 dark:hover:bg-zinc-200 dark:hover:text-zinc-600 hover:text-white transition-all w-20" onClick={() => navigate("/")}>Cancel</button>
-        <Submit title='Add' />
+        <Submit title='Add' loading={loading}/>
       </div>
 
       {error?.title && <ErrorMessage message={`title: ${error.title}`} />}

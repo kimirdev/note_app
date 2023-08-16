@@ -20,9 +20,9 @@ export default function RegisterPage() {
   const [email, setEmail] = useState("")
   const [file, setFile] = useState<File | null>(null);
   const [error, setError] = useState<ErrorType | null>(null)
+  const [loading, setLoading] = useState(false)
 
   const handleChange = (file: File | null) => {
-    console.log(file)
     setFile(file);
   };
 
@@ -30,6 +30,8 @@ export default function RegisterPage() {
 
   const handleSubmit = (e: React.SyntheticEvent<HTMLFormElement>) => {
     e.preventDefault()
+
+    setLoading(true)
 
     const formData = new FormData()
 
@@ -40,7 +42,8 @@ export default function RegisterPage() {
 
     RegisterUser(formData)
       .then(() => navigate("/login"))
-      .catch((e) => setError(e.response.data));
+      .catch((e) => setError(e.response.data))
+      .finally(() => setLoading(false));
   }
 
   return (
@@ -72,13 +75,12 @@ export default function RegisterPage() {
         </FileUploader>
       </label>
 
-      <Submit title='Register' />
+      <Submit title='Register' loading={loading} />
 
       {error?.username && <ErrorMessage message={`username: ${error.username}`} />}
       {error?.password && <ErrorMessage message={`password: ${error.password}`} />}
       {error?.email && <ErrorMessage message={`email: ${error.email}`} />}
       {error?.detail && <ErrorMessage message={`${error.detail}`} />}
-
 
       <p className='mt-4 text-sm dark:text-zinc-200'>Already have an account? <Link to='/login' className=' underline'>Login</Link>.</p>
     </form>

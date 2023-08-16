@@ -16,7 +16,7 @@ export default function Layout() {
 
   const onClickLogout = () => {
     localStorage.removeItem('token');
-    window.location.reload();
+    navigate("/login");
   }
 
   const authed = isAuthed()

@@ -10,19 +10,27 @@ export default function EditNotePage() {
   const navigate = useNavigate()
   const [title, setTitle] = useState("")
   const [content, setContent] = useState("")
+  const [updateLoading, setUpdateLoading] = useState(false)
+  const [getLoading, setGetLoading] = useState(false)
 
   const handleSubmit = (e: React.SyntheticEvent<HTMLFormElement>) => {
-    e.preventDefault()
+    e.preventDefault();
 
-    UpdateNoteById(Number(id), {title, content}).then(() => navigate(`/notes/${id}/`))
+    setUpdateLoading(true);
+
+    UpdateNoteById(Number(id), {title, content})
+      .then(() => navigate(`/notes/${id}/`))
+      .finally(() => setUpdateLoading(false));
   }
-
 
   const [note, setNote] = useState<Note|null>(null)
 
   useEffect(() => {
     if (id) {
-      GetNoteById(Number(id)).then(data => setNote(data.data))
+      setGetLoading(true)
+      GetNoteById(Number(id))
+        .then(data => setNote(data.data))
+        .finally(() => setGetLoading(false))
     }
   }, [id])
 
@@ -41,11 +49,8 @@ export default function EditNotePage() {
 
       <div className='flex justify-around w-80'>
         <button type="button" className=" p-2 rounded text-zinc-600 border-2 border-zinc-500 hover:bg-zinc-500 dark:text-zinc-200 dark:border-zinc-200 dark:hover:bg-zinc-200 dark:hover:text-zinc-600 hover:text-white transition-all w-20"  onClick={() => navigate(`/notes/${id}/`)}>Cancel</button>
-        <Submit title="Edit"/>
+        <Submit title="Edit" loading={updateLoading || getLoading} />
       </div>
-
-      {/* {error?.title && <ErrorMessage message={`username: ${error.title}`} />}
-      {error?.content && <ErrorMessage message={`password: ${error.content}`} />} */}
     </form>
   )
 }
